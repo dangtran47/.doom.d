@@ -51,3 +51,6 @@
 
 (package! org-super-agenda)
 (package! org-fancy-priorities)
+
+(unpin! org-roam)
+(package! org-roam-ui)

@@ -95,7 +95,8 @@
 (define-key evil-visual-state-map (kbd "s-D") 'evil-multiedit-match-and-prev)
 
 (setq
-   doom-font (font-spec :family "Source Code Pro" :size 15 :weight 'light)
+   doom-font (font-spec :family "Iosevka Term" :size 15 :weight 'light)
+   ;; doom-font (font-spec :family "Source Code Pro" :size 15 :weight 'light)
    doom-big-font (font-spec :family "Iosevka Term" :size 36)
    doom-variable-pitch-font (font-spec :family "SF Pro Text")
    web-mode-markup-indent-offset 2
@@ -186,3 +187,18 @@
   (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
 
 (setq org-journal-file-format "%Y-%m-%d.org")
+
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
