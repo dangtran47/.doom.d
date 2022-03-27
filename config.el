@@ -81,8 +81,6 @@
 
 (menu-bar--display-line-numbers-mode-relative)
 
-;; (setq mac-command-modifier      'meta)
-
 
 ;; Match the word under cursor (i.e. make it an edit region). Consecutive presses will
 ;; incrementally add the next unmatched match.
@@ -96,9 +94,8 @@
 (define-key evil-normal-state-map (kbd "s-D") 'evil-multiedit-match-and-prev)
 (define-key evil-visual-state-map (kbd "s-D") 'evil-multiedit-match-and-prev)
 
-
 (setq
-   doom-font (font-spec :family "Iosevka Term" :size 20 :weight 'light)
+   doom-font (font-spec :family "Source Code Pro" :size 15 :weight 'light)
    doom-big-font (font-spec :family "Iosevka Term" :size 36)
    doom-variable-pitch-font (font-spec :family "SF Pro Text")
    web-mode-markup-indent-offset 2
@@ -109,6 +106,7 @@
    org-bullets-bullet-list '("·")
    org-tags-column -80
    json-reformat:indent-width 2
+   mac-command-modifier 'meta
    org-super-agenda-groups '((:name "Today"
                                    :time-grid t
                                    :scheduled today)
@@ -122,6 +120,7 @@
                                    :deadline future)
                              (:name "Big Outcomes"
                                    :tag "bo")))
+
 
 (after! org
   (set-face-attribute 'org-link nil
@@ -162,7 +161,7 @@
                       :background nil
                       :height 1.75
                       :weight 'bold)
-  (setq org-todo-keywords
+ (setq org-todo-keywords
       '((sequence "TODO(t)" "IN_PROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
         org-todo-keyword-faces
         '(("TODO" . (:foreground "#7c7c75" :weight normal :underline t) )
@@ -171,11 +170,19 @@
           ("DONE" . (:foreground "#50a14f" :weight normal :underline t) )
           ("CANCELLED" . (:foreground "#ff6480" :weight normal :underline t) ))
         org-agenda-files (list "~/org/casual/plan.org" "~/org/casual/mar_26.org")
-        org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")
         org-log-done 'time)
 )
 
 (custom-set-faces
- '(org-headline-done
-            ((((class color) (min-colors 16) (background dark))
-              (:strike-through t)))))
+  '(org-headline-done
+    ((((class color) (min-colors 16) (background dark))
+      (:strike-through t)))))
+
+(use-package org-fancy-priorities
+  :ensure t
+  :hook
+  (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
+
+(setq org-journal-file-format "%Y-%m-%d.org")
