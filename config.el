@@ -207,7 +207,7 @@
 	:config
 	(add-hook 'vterm-mode-hook
 			(lambda ()
-			(setq-local evil-insert-state-cursor 'box)
+			(setq-local evil-insert-state-cursor 'line)
 			(evil-insert-state)))
 	(define-key vterm-mode-map [return]                      #'vterm-send-return)
 
@@ -237,3 +237,17 @@
 	(evil-define-key 'normal vterm-mode-map (kbd "i")        #'evil-insert-resume)
 	(evil-define-key 'normal vterm-mode-map (kbd "o")        #'evil-insert-resume)
 	(evil-define-key 'normal vterm-mode-map (kbd "<return>") #'evil-insert-resume))
+
+(global-set-key (kbd "C-c m c") 'mc/edit-lines)
+
+(after! consult
+  (consult-customize
+    consult-ripgrep consult-git-grep consult-grep
+    consult-bookmark consult-recent-file
+    +default/search-project +default/search-other-project
+    +default/search-project-for-symbol-at-point
+    +default/search-cwd +default/search-other-cwd
+    +default/search-notes-for-symbol-at-point
+    +default/search-emacsd
+    consult--source-recent-file consult--source-project-recent-file consult--source-bookmark
+    :preview-key '(:debounce 0.2 any)))
